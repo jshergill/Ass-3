@@ -3,7 +3,7 @@
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Create Your Account</h1>
+                <h1>Register Account</h1>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-           <input required type="password" class="form-control" name="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain an uppercase, lower case and atleast 8 or more characters"><br/><br/>
+           <input required type="password" class="form-control" name="password"><br/><br/>
       </div>
         <div class="form-group">
             <label for="password">Confirm Password</label>
@@ -35,7 +35,7 @@
           </div>
             <br>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">Register Account</button>
     </fieldset>
     </form> 
   </div>

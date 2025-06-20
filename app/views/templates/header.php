@@ -7,6 +7,7 @@ if (!isset($_SESSION['auth'])) {
 <html lang="en">
     <head>
         <link rel="stylesheet" href="/public/main.css">
+
         <link rel="icon" href="/favicon.png">
         <title>COSC 4806</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

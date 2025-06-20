@@ -47,7 +47,6 @@ class User {
               header('Location: /home');
               exit;
           } else {
-              // Log failed attempt
               $_SESSION['failAuth'] = ($_SESSION['failAuth'] ?? 0) + 1;
               $_SESSION['FailTime'] = time();
 
@@ -67,7 +66,6 @@ class User {
   public function register($username, $password) {
   $db = db_connect();
 
-  // Check if user exists
   $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
   $stmt->bindValue(':username', strtolower($username));
   $stmt->execute();

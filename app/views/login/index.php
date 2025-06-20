@@ -32,7 +32,7 @@
             
 
 			<button type="submit" class="btn btn-primary">Login</button>
-			<a href="/create" >Register </a>
+			<a href="/create">Register </a>
 		</fieldset>
 		</form> 
 	</div>
