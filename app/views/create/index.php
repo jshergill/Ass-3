@@ -9,6 +9,15 @@
     </div>
 <div class="row">
     <div class="col-sm-auto">
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success"><?= $_SESSION['success'] ?></div>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger"><?= $_SESSION['error'] ?></div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
 
         <form action="/create/register" method="post">
     <fieldset>
