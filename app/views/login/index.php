@@ -14,13 +14,13 @@
 		<fieldset>
 			<div class="form-group">
 				<label for="username">Username</label>
-				<input required type="text" class="form-control" name="username">
+				<input required type="text" class="form-control" name="username"><br/><br/>
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label>
 				<input required type="password" class="form-control" name="password">
-			</div>
-            <br>
+			</div><br/><br/>
+            
 
 			<button type="submit" class="btn btn-primary">Login</button>
 			<a href="/create" >Register </a>
