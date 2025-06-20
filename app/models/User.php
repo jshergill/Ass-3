@@ -46,5 +46,15 @@ class User {
 			die;
 		}
     }
+  public function register($username, $password) {
+  $db = db_connect();
 
+  // Check if user exists
+  $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
+  $stmt->bindValue(':username', strtolower($username));
+  $stmt->execute();
+  if ($stmt->fetch()) {
+      die('Username already taken.');
+  }
+}
 }
