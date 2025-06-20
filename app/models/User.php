@@ -26,7 +26,7 @@ class User {
 
         if ($elapsed < 60) {
             $remaining = 60 - $elapsed;
-            $_SESSION['error'] = "Too many login attempts. Try again in {$remaining} seconds.";
+            $_SESSION['error'] = "Too many attempts. Try again in {$remaining} seconds.";
             header('Location: /login');
             exit;
         } else {
@@ -42,21 +42,28 @@ class User {
               $_SESSION['auth'] = 1;
               $_SESSION['username'] = ucwords($username);
               $_SESSION['success'] = "Welcome, " . ucwords($username) . "!";
-              unset($_SESSION['failedAuth'], $_SESSION['lastFailedTime']);
-              $this->logAttempt($username, 'success');
+              unset($_SESSION['failAuth'], $_SESSION['FailTime']);
+              $this->loginattempt($username, 'success');
               header('Location: /home');
               exit;
           } else {
               // Log failed attempt
-              $_SESSION['failedAuth'] = ($_SESSION['failedAuth'] ?? 0) + 1;
-              $_SESSION['lastFailedTime'] = time();
+              $_SESSION['failAuth'] = ($_SESSION['failAuth'] ?? 0) + 1;
+              $_SESSION['FailTime'] = time();
 
               $_SESSION['error'] = "Invalid username or password.";
-              $this->logAttempt($username, 'fail'); 
+              $this->loginattempt($username, 'fail'); 
               header('Location: /login');
               exit;
           }
    }
+  private function loginattempt($username, $status) {
+      $db = db_connect();
+      $stmt = $db->prepare("INSERT INTO logins (username, attempt) VALUES (:username, :attempt)");
+      $stmt->bindValue(':username', $username);
+      $stmt->bindValue(':attempt', $status === 'success' ? 1 : 0);
+      $stmt->execute();
+  }
   public function register($username, $password) {
   $db = db_connect();
 
