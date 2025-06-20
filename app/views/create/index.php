@@ -18,8 +18,7 @@
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-          <input required type="password" class="form-control" name="password"><br/><br/>
-
+           <input required type="password" class="form-control" name="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain an uppercase, lower case and atleast 8 or more characters"><br/><br/>
       </div>
         <div class="form-group">
             <label for="password">Confirm Password</label>
