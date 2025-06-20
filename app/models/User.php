@@ -18,34 +18,26 @@ class User {
       return $rows;
     }
 
-    public function authenticate($username, $password) {
-        /*
-         * if username and password good then
-         * $this->auth = true;
-         */
-		$username = strtolower($username);
-		$db = db_connect();
-        $statement = $db->prepare("select * from users WHERE username = :name;");
-        $statement->bindValue(':name', $username);
-        $statement->execute();
-        $rows = $statement->fetch(PDO::FETCH_ASSOC);
-		
-		if (password_verify($password, $rows['password'])) {
-			$_SESSION['auth'] = 1;
-			$_SESSION['username'] = ucwords($username);
-			unset($_SESSION['failedAuth']);
-			header('Location: /home');
-			die;
-		} else {
-			if(isset($_SESSION['failedAuth'])) {
-				$_SESSION['failedAuth'] ++; //increment
-			} else {
-				$_SESSION['failedAuth'] = 1;
-			}
-			header('Location: /login');
-			die;
-		}
+   public function authenticate($username, $password) {
+    $username = strtolower($username);
+    $db = db_connect();
+
+    // SESSION LOCKOUT LOGIC
+    if (isset($_SESSION['failAuth']) && $_SESSION['failAuth'] >= 3) {
+        $elapsed = time() - ($_SESSION['lastFailTime'] ?? 0);
+
+        if ($elapsed < 60) {
+            $remaining = 60 - $elapsed;
+            $_SESSION['error'] = "Too many login attempts. Try again in {$remaining} seconds.";
+            header('Location: /login');
+            exit;
+        } else {
+            // Lockout expired
+            $_SESSION['failAuth'] = 0;
+            unset($_SESSION['lastFailTime']);
+        }
     }
+   }
   public function register($username, $password) {
   $db = db_connect();
 
