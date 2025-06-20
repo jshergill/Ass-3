@@ -56,5 +56,10 @@ class User {
   if ($stmt->fetch()) {
       die('Username already taken.');
   }
+    $hashed = password_hash($password, PASSWORD_DEFAULT);
+     $stmt = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+     $stmt->bindValue(':username', strtolower($username));
+     $stmt->bindValue(':password', $hashed);
+     $stmt->execute();
 }
 }
